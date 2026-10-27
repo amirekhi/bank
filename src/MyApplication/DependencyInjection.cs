@@ -1,12 +1,9 @@
-// MyApp.Application/DependencyInjection.cs
 using Microsoft.Extensions.DependencyInjection;
-
+using MyApp.Application.BankAccounts.Commands.DepositMoney;
+using MyApp.Application.BankAccounts.Commands.OpenAccount;
+using MyApp.Application.BankAccounts.Commands.WithdrawMoney;
 using MyApp.Application.BankAccounts.Queries.GetAccountBalance;
 using MyApp.Application.Users.Commands.RegisterUser;
-
-using MyApplication.BankAccounts.Commands.DepositMoney;
-using MyApplication.BankAccounts.Commands.WithdrawMoney;
-using MyApplication.BankAccounts.Commands.OpenAccount;
 
 namespace MyApp.Application;
 

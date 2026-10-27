@@ -1,9 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+namespace MyApp.Application.Users.Commands.RegisterUser;
 
-namespace MyApplication.User.Commands.RegisterUser
-{
-    public record RegisterUserCommand(string Name, string Email);
-}
+public record RegisterUserCommand(string Name, string Email);

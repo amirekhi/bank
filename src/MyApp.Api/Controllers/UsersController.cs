@@ -1,7 +1,5 @@
-// MyApp.Api/Controllers/UsersController.cs
 using Microsoft.AspNetCore.Mvc;
 using MyApp.Application.Users.Commands.RegisterUser;
-using MyApplication.User.Commands.RegisterUser;
 
 namespace MyApp.Api.Controllers;
 

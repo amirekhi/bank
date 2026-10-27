@@ -1,8 +1,7 @@
-// MyApp.Application/BankAccounts/Commands/WithdrawMoney/WithdrawMoneyHandler.cs
 using MyApp.Domain.BankAccounts;
 using MyApp.Domain.BankAccounts.Exceptions;
 
-namespace MyApplication.BankAccounts.Commands.WithdrawMoney;
+namespace MyApp.Application.BankAccounts.Commands.WithdrawMoney;
 
 public class WithdrawMoneyHandler
 {

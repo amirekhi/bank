@@ -1,4 +1,3 @@
-// MyApp.Application/BankAccounts/Queries/GetAccountBalance/GetAccountBalanceHandler.cs
 namespace MyApp.Application.BankAccounts.Queries.GetAccountBalance;
 
 public class GetAccountBalanceHandler

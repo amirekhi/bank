@@ -1,4 +1,3 @@
-// MyApp.Application/BankAccounts/Queries/GetAccountBalance/IAccountReader.cs
 namespace MyApp.Application.BankAccounts.Queries.GetAccountBalance;
 
 public interface IAccountReader

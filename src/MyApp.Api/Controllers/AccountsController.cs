@@ -1,10 +1,9 @@
-// MyApp.Api/Controllers/AccountsController.cs
 using Microsoft.AspNetCore.Mvc;
+using MyApp.Application.BankAccounts.Commands.DepositMoney;
+using MyApp.Application.BankAccounts.Commands.OpenAccount;
+using MyApp.Application.BankAccounts.Commands.WithdrawMoney;
 using MyApp.Application.BankAccounts.Queries.GetAccountBalance;
 using MyApp.Domain.BankAccounts.Exceptions;
-using MyApplication.BankAccounts.Commands.DepositMoney;
-using MyApplication.BankAccounts.Commands.WithdrawMoney;
-using MyApplication.BankAccounts.Commands.OpenAccount;
 
 namespace MyApp.Api.Controllers;
 

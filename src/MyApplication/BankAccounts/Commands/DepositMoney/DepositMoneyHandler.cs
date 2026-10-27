@@ -1,9 +1,7 @@
-// MyApp.Application/BankAccounts/Commands/DepositMoney/DepositMoneyHandler.cs
 using MyApp.Domain.BankAccounts;
 using MyApp.Domain.BankAccounts.Exceptions;
-using MyApplication.BankAccounts.Commands.DepositMoney;
 
-namespace MyApplication.BankAccounts.Commands.DepositMoney;
+namespace MyApp.Application.BankAccounts.Commands.DepositMoney;
 
 public class DepositMoneyHandler
 {

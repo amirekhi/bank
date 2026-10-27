@@ -1,9 +1,8 @@
-// MyApp.Application/BankAccounts/Commands/OpenAccount/OpenAccountHandler.cs
 using MyApp.Domain.BankAccounts;
 using MyApp.Domain.Users;
 using MyApp.Domain.Users.Exceptions;
 
-namespace MyApplication.BankAccounts.Commands.OpenAccount;
+namespace MyApp.Application.BankAccounts.Commands.OpenAccount;
 
 public class OpenAccountHandler
 {
@@ -18,7 +17,8 @@ public class OpenAccountHandler
 
     public async Task Handle(OpenAccountCommand command, CancellationToken ct)
     {
-        var owner = await _userRepository.GetById(command.OwnerId, ct)
+        // The owner must exist before an account can be opened for them.
+        _ = await _userRepository.GetById(command.OwnerId, ct)
             ?? throw new UserNotFoundException(command.OwnerId);
 
         var overdraftLimit = command.OverdraftLimit > 0

@@ -1,6 +1,4 @@
-// MyApp.Application/Users/Commands/RegisterUser/RegisterUserHandler.cs
 using MyApp.Domain.Users;
-using MyApplication.User.Commands.RegisterUser;
 
 namespace MyApp.Application.Users.Commands.RegisterUser;
 

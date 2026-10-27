@@ -45,7 +45,7 @@ public class TransactionConfiguration : IEntityTypeConfiguration<Transaction>
     {
         builder.HasKey(t => t.Id);
         builder.Property(t => t.Type).HasConversion<string>();
-
+        builder.Property(t => t.Id).ValueGeneratedNever(); 
         builder.OwnsOne(t => t.Amount, m =>
         {
             m.Property(p => p.Amount).HasColumnName("Amount").HasColumnType("decimal(18,2)");
