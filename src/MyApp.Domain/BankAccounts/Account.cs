@@ -1,8 +1,5 @@
-using System;
-using System.Collections.Generic;
 using MyApp.Domain.BankAccounts.Exceptions;
 using MyApp.Domain.Common;
-using MyApp.Domain.Users;
 
 namespace MyApp.Domain.BankAccounts
 {
@@ -14,23 +11,25 @@ namespace MyApp.Domain.BankAccounts
         public Money OverdraftLimit { get; private set; }
         public AccountStatus Status { get; private set; }
 
-        public Guid OwnerId {get; set;}
+        public Guid OwnerId { get; private set; }
         public IReadOnlyCollection<Transaction> Transactions => _transactions.AsReadOnly();
 
         private Account() { }
 
-            public Account(string accountNumber, Guid ownerId, string currency, Money? overdraftLimit = null)   // <- add ownerId parameter
-            {
-                if (string.IsNullOrWhiteSpace(accountNumber))
-                    throw new ArgumentException("Account number is required.");
+        public Account(string accountNumber, Guid ownerId, string currency, Money? overdraftLimit = null)
+        {
+            if (string.IsNullOrWhiteSpace(accountNumber))
+                throw new ArgumentException("Account number is required.");
 
-                Id = Guid.NewGuid();
-                AccountNumber = accountNumber;
-                OwnerId = ownerId;                             // <- set it here
-                Balance = Money.Zero(currency);
-                OverdraftLimit = overdraftLimit ?? Money.Zero(currency);
-                Status = AccountStatus.Active;
-            }
+            Id = Guid.NewGuid();
+            AccountNumber = accountNumber;
+            OwnerId = ownerId;
+            Balance = Money.Zero(currency);
+            OverdraftLimit = overdraftLimit ?? Money.Zero(currency);
+            Status = AccountStatus.Active;
+        }
+
+        public bool IsOwnedBy(Guid userId) => OwnerId == userId;
 
         public void Deposit(Money amount, string? description = null)
         {
@@ -58,9 +57,24 @@ namespace MyApp.Domain.BankAccounts
             _transactions.Add(new Transaction(TransactionType.Withdrawal, amount, description));
         }
 
+        public void Suspend()
+        {
+            if (Status != AccountStatus.Active)
+                throw new InvalidStatusTransitionException($"Account {AccountNumber} cannot be suspended from status {Status}.");
+            Status = AccountStatus.Suspended;
+        }
+
+        public void Reactivate()
+        {
+            if (Status != AccountStatus.Suspended)
+                throw new InvalidStatusTransitionException($"Account {AccountNumber} cannot be reactivated from status {Status}.");
+            Status = AccountStatus.Active;
+        }
+
         public void Close()
         {
-            EnsureActive();
+            if (Status == AccountStatus.Closed)
+                throw new AccountClosedException(AccountNumber);
             if (Balance.Amount > 0)
                 throw new InvalidOperationException("Cannot close an account with a non-zero balance.");
 
@@ -69,8 +83,10 @@ namespace MyApp.Domain.BankAccounts
 
         private void EnsureActive()
         {
-            if (Status != AccountStatus.Active)
+            if (Status == AccountStatus.Closed)
                 throw new AccountClosedException(AccountNumber);
+            if (Status == AccountStatus.Suspended)
+                throw new AccountSuspendedException(AccountNumber);
         }
     }
 }

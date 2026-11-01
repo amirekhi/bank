@@ -2,5 +2,8 @@ namespace MyApp.Application.BankAccounts.Queries.GetAccountBalance;
 
 public interface IAccountReader
 {
-    Task<AccountBalanceDto?> GetBalance(string accountNumber, CancellationToken ct);
+    /// <param name="ownerId">When set, only an account owned by this user is returned.</param>
+    Task<AccountBalanceDto?> GetBalance(string accountNumber, Guid? ownerId, CancellationToken ct);
+
+    Task<IReadOnlyList<AccountBalanceDto>> ListByOwner(Guid ownerId, CancellationToken ct);
 }

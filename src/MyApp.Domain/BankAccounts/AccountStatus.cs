@@ -1,5 +1,4 @@
 namespace MyApp.Domain.BankAccounts
 {
-    public enum AccountStatus{Active, Closed}    
-    
+    public enum AccountStatus { Active, Suspended, Closed }
 }

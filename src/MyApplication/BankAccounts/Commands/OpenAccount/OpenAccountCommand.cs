@@ -1,3 +1,4 @@
 namespace MyApp.Application.BankAccounts.Commands.OpenAccount;
 
-public record OpenAccountCommand(string AccountNumber, Guid OwnerId, string Currency, decimal OverdraftLimit = 0);
+// The owner is always the authenticated caller; the client can no longer choose it.
+public record OpenAccountCommand(string AccountNumber, string Currency);
